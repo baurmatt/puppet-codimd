@@ -1,5 +1,10 @@
+# @summary Configure the CodiMD application user
+#
+# @api private
 class codimd::user (
 ) {
+  assert_private()
+
   group { 'codimd':
     system => true,
   }

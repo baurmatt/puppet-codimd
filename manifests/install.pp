@@ -1,3 +1,6 @@
+# @summary Install CodiMD
+#
+# @api private
 class codimd::install (
   String $version,
 ) {
@@ -19,7 +22,7 @@ class codimd::install (
     user     => 'codimd',
     group    => 'codimd',
     source   => 'https://github.com/codimd/server.git',
-    revision => '1.5.0',
+    revision => $version,
   }
   ~> exec { '/opt/codimd/bin/setup':
     cwd         => '/opt/codimd',

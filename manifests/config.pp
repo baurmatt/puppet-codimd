@@ -1,10 +1,13 @@
+# @summary Configure CodiMD
+#
+# @api private
 class codimd::config (
   Hash[String,Data] $config,
 ) {
   assert_private()
 
   $_config = deep_merge({ sessionSecret => fqdn_rand_string(64)}, $config)
-  
+
   assert_type(Codimd::Db, $_config['db'])
 
   file { '/opt/codimd/config.json':
