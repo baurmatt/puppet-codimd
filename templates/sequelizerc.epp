@@ -1,0 +1,19 @@
+<%- | Codimd::Dialect $dialect,
+      String[1]       $host,
+      Stdlib::Port    $port,
+      String[1]       $username,
+      String[1]       $password,
+      String[1]       $database,
+| -%>
+//
+// Managed by Puppet
+//
+
+var path = require('path');
+
+module.exports = {
+    'config':          path.resolve('config.json'),
+    'migrations-path': path.resolve('lib', 'migrations'),
+    'models-path':     path.resolve('lib', 'models'),
+    'url':             '<%= $dialect %>://<%= $username %>:<%= $password %>@<%= $host %>:<%= $port %>/<%= $database %>'
+}

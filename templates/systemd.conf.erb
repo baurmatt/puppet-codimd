@@ -1,0 +1,22 @@
+#
+# Managed by Puppet
+#
+
+[Unit]
+Description="codimd"
+After=network.target
+Requires=network.target
+
+[Service]
+User=codimd
+Group=codimd
+PrivateTmp=true
+PrivateDevices=true
+Environment=NODE_ENV=production
+
+WorkingDirectory=/opt/codimd
+ExecStart=/usr/bin/env node /opt/codimd/app.js
+
+[Install]
+WantedBy=multi-user.target
+
