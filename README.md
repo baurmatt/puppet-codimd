@@ -1,9 +1,5 @@
 # codimd
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
-
-The README template below provides a starting point with details about what information to include in your README.
-
 #### Table of Contents
 
 1. [Description](#description)
@@ -17,71 +13,77 @@ The README template below provides a starting point with details about what info
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
-
-This should be a fairly short description helps the user decide if your module is what they want.
+This module installs and configure CodiMD. It's inspired by the [puppet-etherpad](https://forge.puppetlabs.com/puppet/etherpad) module.
 
 ## Setup
 
-### What codimd affects **OPTIONAL**
+### What codimd affects
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
+ * This module depends on [puppet-nodejs](https://forge.puppetlabs.com/puppet/nodejs)
+ * It also depends on [puppetlabs-vcsrepo](https://forge.puppetlabs.com/puppetlabs/vcsrepo) and hence git
+ * It will setup a service using systemd
+ * It will install all npm dependencies and keep them in sync on updates
+ * It will also run db migration automatically on updates
 
-If there's more that they should know about, though, this is the place to mention:
+### Setup Requirements
 
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
+This module requires a database. Though it can use sqlite, it's recommend to use PostgreSQL or MySQL. See CodiMD offical documentation for further advice.
 
 ### Beginning with codimd
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+Before to installation, a target database should exist. Please consult the
+documentation of
+[puppetlabs-postgresql](https://forge.puppetlabs.com/puppetlabs/postgresql), or
+[puppetlabs-mysql](https://forge.puppetlabs.com/puppetlabs/mysql) for how to
+create those.
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your users how to use your module to solve problems, and be sure to include code examples. Include three to five examples of the most important or common tasks a user can accomplish with your module. Show users how to accomplish more complex tasks that involve different types, classes, and functions working in tandem.
+The basic usage is:
+
+```puppet
+class { 'codimd':
+  config => {
+    host   => 'localhost',
+    domain => 'codimd.example.org',
+    db     => {
+      username => 'codimd',
+      password => 'mySuperSecurePassword',
+      database => 'codimd',
+      host     => '127.0.0.1',
+      port     => 3306,
+      dialect  => 'mysql',
+    },
+  },
+}
+```
+
+Pin the version if you don't like automatic updates
+
+```puppet
+class { 'codimd':
+  config  => {
+  ...
+  },
+  version => '1.5.0',
+}
+```
 
 ## Reference
 
-This section is deprecated. Instead, add reference information to your code as Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your module. For details on how to add code comments and generate documentation with Strings, see the Puppet Strings [documentation](https://puppet.com/docs/puppet/latest/puppet_strings.html) and [style guide](https://puppet.com/docs/puppet/latest/puppet_strings_style.html)
-
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the root of your module directory and list out each of your module's classes, defined types, facts, functions, Puppet tasks, task plans, and resource types and providers, along with the parameters for each.
-
-For each element (class, defined type, function, and so on), list:
-
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
-
-For example:
-
-```
-### `pet::cat`
-
-#### Parameters
-
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
-```
+For information on the classes and types, see the [REFERENCE.md](https://github.com/puppetlabs/puppetlabs-stdlib/blob/master/REFERENCE.md).
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other warnings.
+* Only systemd is supported as Service provider.
+* Most things are currently hardcoded.
+* Module is only tested on Ubuntu 18.04
+
+PRs are very welcome! :)
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing to your project and how they should submit their work.
+This module is development with the help of [pdk](https://puppet.com/docs/pdk/1.x/pdk.html).
 
-## Release Notes/Contributors/Etc. **Optional**
+Please follow the standard Puppet development processes as lived by Puppetlabs/Vox Pupuli.
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
