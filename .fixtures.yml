@@ -1,0 +1,10 @@
+# This file can be used to install module dependencies for unit testing
+# See https://github.com/puppetlabs/puppetlabs_spec_helper#using-fixtures for details
+---
+fixtures:
+  repositories:
+    stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib.git'
+    systemd: 'https://github.com/camptocamp/puppet-systemd.git'
+    vcsrepo: 'https://github.com/puppetlabs/puppetlabs-vcsrepo.git'
+    nodejs: 'https://github.com/voxpupuli/puppet-nodejs.git'
+
