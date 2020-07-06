@@ -27,7 +27,7 @@ describe 'codimd::install' do
               .with_ensure('directory')
               .with_owner('codimd')
               .with_group('codimd')
-              .that_comes_before('Vcsrepo[/opt/codimd]') 
+              .that_comes_before('Vcsrepo[/opt/codimd]')
           end
 
           it do
@@ -37,7 +37,7 @@ describe 'codimd::install' do
               .with_group('codimd')
               .with_source('https://github.com/codimd/server.git')
               .with_revision('master')
-              .that_comes_before('Exec[/opt/codimd/bin/setup]') 
+              .that_comes_before('Exec[/opt/codimd/bin/setup]')
           end
 
           it do

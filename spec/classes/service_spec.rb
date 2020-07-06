@@ -15,7 +15,7 @@ describe 'codimd::service' do
           it do
             is_expected.to contain_systemd__unit_file('codimd.service')
               .with_source('puppet:///modules/codimd/systemd.conf')
-              .that_notifies('Service[codimd]') 
+              .that_notifies('Service[codimd]')
           end
 
           it do
