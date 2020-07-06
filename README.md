@@ -1,5 +1,11 @@
 # codimd
 
+[![Build Status](https://travis-ci.com/baurmatt/puppet-codimd.svg?branch=master)](https://travis-ci.com/baurmatt/puppet-codimd)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/baurmatt/codimd.svg)](https://forge.puppetlabs.com/baurmatt/codimd)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/baurmatt/codimd.svg)](https://forge.puppetlabs.com/baurmatt/codimd)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/baurmatt/codimd.svg)](https://forge.puppetlabs.com/baurmatt/codimd)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/baurmatt/codimd.svg)](https://forge.puppetlabs.com/baurmatt/codimd)
+
 #### Table of Contents
 
 1. [Description](#description)
