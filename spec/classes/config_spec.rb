@@ -24,7 +24,7 @@ describe 'codimd::config' do
         end
 
         context 'with defaults' do
-          let(:config) { {'sessionSecret' => 'testSecret'}.deep_merge(default_config) }
+          let(:config) { { 'sessionSecret' => 'testSecret' }.deep_merge(default_config) }
           let(:params) do
             {
               config: config,
@@ -38,7 +38,7 @@ describe 'codimd::config' do
               .with_ensure('file')
               .with_owner('codimd')
               .with_group('codimd')
-              .with_content(JSON.pretty_generate({production: config }) << "\n")
+              .with_content(JSON.pretty_generate(production: config) << "\n")
           end
 
           it do
@@ -51,18 +51,18 @@ describe 'codimd::config' do
         end
 
         context 'generates 64 char sessionSecret if not given' do
-            let(:params) do
-              {
-                config: default_config,
-              }
-            end
+          let(:params) do
+            {
+              config: default_config,
+            }
+          end
 
-            it { is_expected.to compile.with_all_deps }
+          it { is_expected.to compile.with_all_deps }
 
-            it do
-              is_expected.to contain_file('/opt/codimd/config.json')
-                .with_content(%r{\s+"sessionSecret": "[a-zA-Z0-9]{64}",$})
-            end
+          it do
+            is_expected.to contain_file('/opt/codimd/config.json')
+              .with_content(%r{\s+"sessionSecret": "[a-zA-Z0-9]{64}",$})
+          end
         end
       end
     end

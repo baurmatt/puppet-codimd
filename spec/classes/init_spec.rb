@@ -54,7 +54,7 @@ describe 'codimd' do
             it do
               is_expected.to contain_exec(command)
                 .with_cwd('/opt/codimd')
-                .with_path(['/usr/local/sbin','/usr/local/bin','/usr/sbin','/usr/bin','/sbin','/bin'])
+                .with_path(['/usr/local/sbin', '/usr/local/bin', '/usr/sbin', '/usr/bin', '/sbin', '/bin'])
                 .with_user('codimd')
                 .with_group('codimd')
                 .with_refreshonly(true)
@@ -68,8 +68,6 @@ describe 'codimd' do
 
           it { is_expected.to contain_class('codimd::service') }
         end
-
-
       end
     end
   end
