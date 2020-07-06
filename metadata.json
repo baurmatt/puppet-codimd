@@ -1,7 +1,7 @@
 {
   "name": "baurmatt-codimd",
-  "version": "0.1.0",
-  "author": "Matthias Baur",
+  "version": "0.2.0",
+  "author": "baurmatt",
   "summary": "Puppet Module to install and configure codiMD",
   "license": "Apache-2.0",
   "source": "https://github.com/baurmatt/puppet-codimd",
