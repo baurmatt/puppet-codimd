@@ -2,7 +2,8 @@
 #
 # @api private
 class codimd::install (
-  String $version,
+  String          $version,
+  Stdlib::HTTPUrl $source,
 ) {
   assert_private()
 
@@ -21,7 +22,7 @@ class codimd::install (
     provider => 'git',
     user     => 'codimd',
     group    => 'codimd',
-    source   => 'https://github.com/codimd/server.git',
+    source   => $source,
     revision => $version,
   }
   ~> exec { '/opt/codimd/bin/setup':

@@ -5,11 +5,13 @@
 class codimd (
   Hash[String,Data] $config,
   String            $version = 'master',
+  Stdlib::HTTPUrl   $source  = 'https://github.com/codimd/server.git',
 ) {
   include codimd::user
 
   class { 'codimd::install':
     version => $version,
+    source  => $source,
     require => Class['codimd::user'],
   }
   -> class { 'codimd::config':
