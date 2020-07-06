@@ -13,6 +13,7 @@ describe 'codimd::install' do
           let(:params) do
             {
               version: 'master',
+              source: 'https://github.com/codimd/server.git',
             }
           end
 
@@ -46,6 +47,22 @@ describe 'codimd::install' do
               .with_user('codimd')
               .with_group('codimd')
               .with_refreshonly(true)
+          end
+        end
+
+        context 'with source => "https://gitlab.com/codimd/server.git"' do
+          let(:params) do
+            {
+              version: 'master',
+              source: 'https://gitlab.com/codimd/server.git',
+            }
+          end
+
+          it { is_expected.to compile.with_all_deps }
+
+          it do
+            is_expected.to contain_vcsrepo('/opt/codimd')
+              .with_source('https://gitlab.com/codimd/server.git')
           end
         end
       end
